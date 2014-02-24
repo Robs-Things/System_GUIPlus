@@ -4,7 +4,7 @@
 //    Designs by: SC, TheBlackParrot and Fluffy
 
 // Load Modules
-$GUIPlus::Version = 0.13;
+$GUIPlus::Version = 0.14;
 exec("./modules/main/main.cs");
 exec("./modules/loadingGUI/main.cs");
 exec("./modules/serverBrowser/main.cs");
