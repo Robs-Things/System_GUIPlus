@@ -18,6 +18,6 @@ new GuiControlProfile(BlotaLoadingTextC)
 {
    fontColor = "25 25 25 255";
    fontSize = 16;
-   fontType = "Open Sans";
+   fontType = "Arial";
    justify = "center";
 };

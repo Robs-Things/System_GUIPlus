@@ -324,6 +324,7 @@ function ServerBrowser_Join(%data)
    $Blota::NLGUI::SelectedServer["ping"] = "???";
    $Blota::NLGUI::SelectedServer["IP"] =           getField(%data, 0);
    $Blota::NLGUI::SelectedServer["port"] =         getField(%data, 1);
+   $Blota::NLGUI::Mode = "internet";
 
    NLGUI_SetServerDetails();
    

@@ -70,13 +70,17 @@ function NLGUI_ImageFetch::finish(%this)
 
 function NLGUI_SetServerDetails()
 {
-    NLGUI_HostName.setText("<font:Open Sans Light:36><color:7A7A7A>" @ $Blota::NLGUI::SelectedServer["host"]);
-    NLGUI_ServerName.setText("<font:Open Sans:40><color:000000>" @ $Blota::NLGUI::SelectedServer["name"]);
-    NLGUI_Players.setText("<font:Open Sans:20><color:C4C4C4>Players: " @ $Blota::NLGUI::SelectedServer["playerCount"] @ "/" @ $Blota::NLGUI::SelectedServer["maxPlayers"]);
-    NLGUI_Bricks.setText("<font:Open Sans:20><color:C4C4C4>Bricks: " @ $Blota::NLGUI::SelectedServer["brickCount"]);
-    NLGUI_Ping.setText("<font:Open Sans:20><color:C4C4C4>Ping: " @ $Blota::NLGUI::SelectedServer["ping"] @ "ms");
+    NLGUI_HostName.setText("<font:Arial:36><color:7A7A7A>" @ $Blota::NLGUI::SelectedServer["host"]);
+    NLGUI_ServerName.setText("<font:Arial:40><color:000000>" @ $Blota::NLGUI::SelectedServer["name"]);
+    NLGUI_Players.setText("<font:Arial:20><color:C4C4C4>Players: " @ $Blota::NLGUI::SelectedServer["playerCount"] @ "/" @ $Blota::NLGUI::SelectedServer["maxPlayers"]);
+    NLGUI_Bricks.setText("<font:Arial:20><color:C4C4C4>Bricks: " @ $Blota::NLGUI::SelectedServer["brickCount"]);
+    NLGUI_Ping.setText("<font:Arial:20><color:C4C4C4>Ping: " @ $Blota::NLGUI::SelectedServer["ping"] @ "ms");
     
-    NLGUI_fetchPreview($Blota::NLGUI::SelectedServer["IP"], $Blota::NLGUI::SelectedServer["port"]);
+    if($Blota::NLGUI::Mode $= "internet")
+      NLGUI_fetchPreview($Blota::NLGUI::SelectedServer["IP"], $Blota::NLGUI::SelectedServer["port"]);
+      
+    if($Blota::NLGUI::Mode $= "local")
+      NLGUI_PreviewImage.setBitmap("Add-ons/system_guiplus/modules/loadingGui/ui/local");
     
     NLGUI_PurgePlayerList();
             
@@ -98,6 +102,7 @@ package blota_joinServerPackage
         $Blota::NLGUI::SelectedServer["ping"] = %SDO.ping;
         $Blota::NLGUI::SelectedServer["IP"] = getField(strReplace(%SDO.ip, ":", "\t"), 0);
         $Blota::NLGUI::SelectedServer["port"] = getField(strReplace(%SDO.ip, ":", "\t"), 1);
+        $Blota::NLGUI::Mode = "internet";
         
         if(getWord($Blota::NLGUI::SelectedServer["name"], 0) $= "s")
             $Blota::NLGUI::SelectedServer["name"] = restWords($Blota::NLGUI::SelectedServer["name"]);
@@ -109,6 +114,30 @@ package blota_joinServerPackage
 	 {
 	    parent::update(%this, %cl, %name, %BL_ID, %trust, %admin, %score);
        NLGUI_AddPlayerToList(%name, %BL_ID, %score);
+    }
+    
+    function createServer(%type)
+    {
+       if(%type $= "internet")
+       {
+          $Blota::NLGUI::SelectedServer["name"] = $Pref::Server::Name;
+          $Blota::NLGUI::SelectedServer["host"] = $pref::Player::NetName;
+          $Blota::NLGUI::SelectedServer["playerCount"] = 1;
+          $Blota::NLGUI::SelectedServer["maxPlayers"] = $Pref::Server::MaxPlayers;
+          $Blota::NLGUI::SelectedServer["brickCount"] = 0;
+          $Blota::NLGUI::Mode = "local";
+       }
+       if(%type $= "SinglePlayer")
+       {
+          $Blota::NLGUI::SelectedServer["name"] = "Single Player";
+          $Blota::NLGUI::SelectedServer["host"] = $pref::Player::LanName;
+          $Blota::NLGUI::SelectedServer["playerCount"] = 1;
+          $Blota::NLGUI::SelectedServer["maxPlayers"] = 1;
+          $Blota::NLGUI::SelectedServer["brickCount"] = 0;
+          $Blota::NLGUI::Mode = "local";
+       }
+       NLGUI_SetServerDetails();
+       parent::createServer(%type);
     }
 };
 activatePackage(blota_joinServerPackage);
@@ -129,8 +158,8 @@ function NLGUI_PingUpdate()
    
     if(isObject(ServerConnection))
     { 
-        NLGUI_Ping.setText("<font:Open Sans:20><color:C4C4C4>Ping: " @ serverConnection.getPing() @ "ms");    
-        $Blota::NLGUI::PingUpdate = schedule(1000, 0, NLGUI_PingUpdate);
+        NLGUI_Ping.setText("<font:Arial:20><color:C4C4C4>Ping: " @ serverConnection.getPing() @ "ms");    
+        $Blota::NLGUI::PingUpdate = schedule(2000, 0, NLGUI_PingUpdate);
     }
 }
 
@@ -154,7 +183,7 @@ function NLGUI_AddPlayerToList(%name, %BL_ID, %score)
       lineSpacing = "2";
       allowColorChars = "0";
       maxChars = "-1";
-      text = "<font:Open Sans:18><color:666666>" @ %name;
+      text = "<font:Arial:18><color:666666>" @ %name;
       maxBitmapHeight = "-1";
       selectable = "1";
       autoResize = "1";
@@ -172,7 +201,7 @@ function NLGUI_AddPlayerToList(%name, %BL_ID, %score)
       lineSpacing = "2";
       allowColorChars = "0";
       maxChars = "-1";
-      text = "<font:Open Sans:18><color:666666>" @ %BL_ID;
+      text = "<font:Arial:18><color:666666>" @ %BL_ID;
       maxBitmapHeight = "-1";
       selectable = "1";
       autoResize = "1";
@@ -190,7 +219,7 @@ function NLGUI_AddPlayerToList(%name, %BL_ID, %score)
       lineSpacing = "2";
       allowColorChars = "0";
       maxChars = "-1";
-      text = "<font:Open Sans:18><color:666666>" @ %score;
+      text = "<font:Arial:18><color:666666>" @ %score;
       maxBitmapHeight = "-1";
       selectable = "1";
       autoResize = "1";
