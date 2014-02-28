@@ -22,7 +22,7 @@ new GuiControl(ServerBrowser) {
       clipToParent = "1";
       command = "canvas.popdialog(ServerBrowser);";
       accelerator = "escape";
-      bitmap = "./ui/bg";
+      bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/bg";
       wrap = "0";
       lockAspectRatio = "0";
       alignLeft = "0";
@@ -64,31 +64,27 @@ new GuiControl(ServerBrowser) {
             clipToParent = "1";
             color = "0 0 0 0";
 
-            new GuiSwatchCtrl() {
-               profile = "GuiDefaultProfile";
+            new GuiBitmapButtonCtrl(ServerBrowser_TAB_LAN) {
+               profile = "ServerBrowserA13";
                horizSizing = "right";
                vertSizing = "bottom";
-               position = "40 41";
-               extent = "82 26";
+               position = "132 41";
+               extent = "48 26";
                minExtent = "8 2";
                enabled = "1";
                visible = "1";
                clipToParent = "1";
-               color = "255 255 255 255";
-
-               new GuiTextCtrl() {
-                  profile = "ServerBrowserA13";
-                  horizSizing = "right";
-                  vertSizing = "bottom";
-                  position = "8 4";
-                  extent = "67 18";
-                  minExtent = "8 2";
-                  enabled = "1";
-                  visible = "1";
-                  clipToParent = "1";
-                  text = "INTERNET";
-                  maxLength = "255";
-               };
+               text = "LAN";
+               groupNum = "-1";
+               buttonType = "PushButton";
+               bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/buttons/tab";
+               lockAspectRatio = "0";
+               alignLeft = "0";
+               alignTop = "0";
+               overflowImage = "0";
+               mKeepCached = "0";
+               mColor = "255 255 255 255";
+               command = "ServerBrowser_LANTab();";
             };
             new GuiBitmapButtonCtrl() {
                profile = "GuiDefaultProfile";
@@ -101,34 +97,38 @@ new GuiControl(ServerBrowser) {
                visible = "1";
                clipToParent = "1";
                command = "canvas.popdialog(ServerBrowser);";
-               text = "";
                groupNum = "-1";
                buttonType = "PushButton";
-               bitmap = "./ui/buttons/x";
+               bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/buttons/x";
                lockAspectRatio = "0";
                alignLeft = "0";
                alignTop = "0";
                overflowImage = "0";
                mKeepCached = "0";
                mColor = "255 255 255 255";
+               text = "";
             };
-            new GuiMLTextCtrl() {
-               profile = "GuiMLTextProfile";
+            new GuiBitmapButtonCtrl(ServerBrowser_TAB_FAV) {
+               profile = "ServerBrowserA13";
                horizSizing = "right";
                vertSizing = "bottom";
-               position = "173 46";
-               extent = "91 16";
+               position = "190 41";
+               extent = "101 26";
                minExtent = "8 2";
                enabled = "1";
                visible = "1";
                clipToParent = "1";
-               lineSpacing = "2";
-               allowColorChars = "0";
-               maxChars = "-1";
-               text = "<font:arial bold:16><color:FFFFFF>FAVOURITES";
-               maxBitmapHeight = "-1";
-               selectable = "1";
-               autoResize = "1";
+               text = "FAVOURITES";
+               groupNum = "-1";
+               buttonType = "PushButton";
+               bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/buttons/tab";
+               lockAspectRatio = "0";
+               alignLeft = "0";
+               alignTop = "0";
+               overflowImage = "0";
+               mKeepCached = "0";
+               mColor = "255 255 255 255";
+               command = "ServerBrowser_FAVTab();";
             };
             new GuiBitmapCtrl() {
                profile = "GuiDefaultProfile";
@@ -140,7 +140,7 @@ new GuiControl(ServerBrowser) {
                enabled = "1";
                visible = "1";
                clipToParent = "1";
-               bitmap = "./ui/searchBar";
+               bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/searchBar";
                wrap = "0";
                lockAspectRatio = "0";
                alignLeft = "0";
@@ -179,7 +179,6 @@ new GuiControl(ServerBrowser) {
                   visible = "1";
                   clipToParent = "1";
                   command = "ServerBrowser_searchBar.setText(\"\"); ServerBrowser_InputClick.setVisible(0); ServerBrowser_searchBar.makeFirstResponder(1);";
-                  text = "";
                   groupNum = "-1";
                   buttonType = "PushButton";
                   bitmap = "~/System_GuiPlus/modules/main/images/buttons/misc/blank";
@@ -189,6 +188,7 @@ new GuiControl(ServerBrowser) {
                   overflowImage = "0";
                   mKeepCached = "0";
                   mColor = "255 255 255 255";
+                  text = "";
                };
                new GuiBitmapButtonCtrl() {
                   profile = "GuiDefaultProfile";
@@ -201,10 +201,9 @@ new GuiControl(ServerBrowser) {
                   visible = "1";
                   clipToParent = "1";
                   command = "ServerBrowser_FetchServerList(1, ServerBrowser_searchBar.getValue());";
-                  text = "";
                   groupNum = "-1";
                   buttonType = "PushButton";
-                  bitmap = "./ui/buttons/search";
+                  bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/buttons/search";
                   lockAspectRatio = "0";
                   alignLeft = "0";
                   alignTop = "0";
@@ -224,34 +223,38 @@ new GuiControl(ServerBrowser) {
                visible = "1";
                clipToParent = "1";
                command = "ServerBrowser_toggleViewPane();";
-               text = "";
                groupNum = "-1";
                buttonType = "PushButton";
-               bitmap = "./ui/buttons/viewG";
+               bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/buttons/viewG";
                lockAspectRatio = "0";
                alignLeft = "0";
                alignTop = "0";
                overflowImage = "0";
                mKeepCached = "0";
                mColor = "255 255 255 255";
+               text = "";
             };
-            new GuiMLTextCtrl() {
-               profile = "GuiMLTextProfile";
+            new GuiBitmapButtonCtrl(ServerBrowser_TAB_Internet) {
+               profile = "ServerBrowserA13";
                horizSizing = "right";
                vertSizing = "bottom";
-               position = "134 46";
-               extent = "29 16";
+               position = "41 41";
+               extent = "81 26";
                minExtent = "8 2";
                enabled = "1";
                visible = "1";
                clipToParent = "1";
-               lineSpacing = "2";
-               allowColorChars = "0";
-               maxChars = "-1";
-               text = "<font:arial bold:16><color:FFFFFF>LAN";
-               maxBitmapHeight = "-1";
-               selectable = "1";
-               autoResize = "1";
+               text = "INTERNET";
+               groupNum = "-1";
+               buttonType = "PushButton";
+               bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/buttons/tabc";
+               lockAspectRatio = "0";
+               alignLeft = "0";
+               alignTop = "0";
+               overflowImage = "0";
+               mKeepCached = "0";
+               mColor = "255 255 255 255";
+               command = "ServerBrowser_INTTab();";
             };
          };
          new GuiScrollCtrl(serverBrowser_scroll) {
@@ -285,133 +288,6 @@ new GuiControl(ServerBrowser) {
                color = "0 0 0 0";
             };
          };
-         new GuiSwatchCtrl(ServerBrowser_ViewPanel) {
-            profile = "GuiDefaultProfile";
-            horizSizing = "right";
-            vertSizing = "bottom";
-            position = "363 64";
-            extent = "161 125";
-            minExtent = "8 2";
-            enabled = "1";
-            visible = "0";
-            clipToParent = "1";
-            color = "20 20 20 255";
-
-            new GuiSwatchCtrl() {
-               profile = "GuiDefaultProfile";
-               horizSizing = "right";
-               vertSizing = "bottom";
-               position = "5 7";
-               extent = "151 78";
-               minExtent = "8 2";
-               enabled = "1";
-               visible = "1";
-               clipToParent = "1";
-               color = "255 255 255 255";
-
-               new GuiBitmapButtonCtrl() {
-                  profile = "GuiDefaultProfile";
-                  horizSizing = "right";
-                  vertSizing = "bottom";
-                  position = "4 3";
-                  extent = "144 24";
-                  minExtent = "8 2";
-                  enabled = "1";
-                  visible = "1";
-                  clipToParent = "1";
-                  command = "ServerBrowser_SetGridView();";
-                  text = "";
-                  groupNum = "-1";
-                  buttonType = "PushButton";
-                  bitmap = "./ui/buttons/VCGrid";
-                  lockAspectRatio = "0";
-                  alignLeft = "0";
-                  alignTop = "0";
-                  overflowImage = "0";
-                  mKeepCached = "0";
-                  mColor = "255 255 255 255";
-               };
-               new GuiBitmapButtonCtrl() {
-                  profile = "GuiDefaultProfile";
-                  horizSizing = "right";
-                  vertSizing = "bottom";
-                  position = "4 25";
-                  extent = "144 24";
-                  minExtent = "8 2";
-                  enabled = "1";
-                  visible = "1";
-                  clipToParent = "1";
-                  command = "ServerBrowser_SetSecView();";
-                  text = "";
-                  groupNum = "-1";
-                  buttonType = "PushButton";
-                  bitmap = "./ui/buttons/VCSec";
-                  lockAspectRatio = "0";
-                  alignLeft = "0";
-                  alignTop = "0";
-                  overflowImage = "0";
-                  mKeepCached = "0";
-                  mColor = "255 255 255 255";
-               };
-               new GuiBitmapButtonCtrl() {
-                  profile = "GuiDefaultProfile";
-                  horizSizing = "right";
-                  vertSizing = "bottom";
-                  position = "3 49";
-                  extent = "144 24";
-                  minExtent = "8 2";
-                  enabled = "1";
-                  visible = "1";
-                  clipToParent = "1";
-                  command = "ServerBrowser_SetListView();";
-                  text = "";
-                  groupNum = "-1";
-                  buttonType = "PushButton";
-                  bitmap = "./ui/buttons/VCList";
-                  lockAspectRatio = "0";
-                  alignLeft = "0";
-                  alignTop = "0";
-                  overflowImage = "0";
-                  mKeepCached = "0";
-                  mColor = "255 255 255 255";
-               };
-            };
-            new GuiSwatchCtrl() {
-               profile = "GuiDefaultProfile";
-               horizSizing = "right";
-               vertSizing = "bottom";
-               position = "5 88";
-               extent = "151 32";
-               minExtent = "8 2";
-               enabled = "1";
-               visible = "1";
-               clipToParent = "1";
-               color = "255 255 255 255";
-
-               new GuiBitmapButtonCtrl() {
-                  profile = "GuiDefaultProfile";
-                  horizSizing = "right";
-                  vertSizing = "bottom";
-                  position = "3 3";
-                  extent = "144 24";
-                  minExtent = "8 2";
-                  enabled = "1";
-                  visible = "1";
-                  clipToParent = "1";
-                  command = "serverBrowser_ShowPrevPane();";
-                  text = "";
-                  groupNum = "-1";
-                  buttonType = "PushButton";
-                  bitmap = "./ui/buttons/VCPrev";
-                  lockAspectRatio = "0";
-                  alignLeft = "0";
-                  alignTop = "0";
-                  overflowImage = "0";
-                  mKeepCached = "0";
-                  mColor = "255 255 255 255";
-               };
-            };
-         };
          new GuiBitmapButtonCtrl() {
             profile = "GuiDefaultProfile";
             horizSizing = "right";
@@ -423,18 +299,18 @@ new GuiControl(ServerBrowser) {
             visible = "1";
             clipToParent = "1";
             command = "canvas.popdialog(ServerBrowser);";
-            text = "";
             groupNum = "-1";
             buttonType = "PushButton";
-            bitmap = "./ui/buttons/canc";
+            bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/buttons/canc";
             lockAspectRatio = "0";
             alignLeft = "0";
             alignTop = "0";
             overflowImage = "0";
             mKeepCached = "0";
             mColor = "255 255 255 255";
+            text = "";
          };
-         new GuiBitmapButtonCtrl() {
+         new GuiBitmapButtonCtrl(ServerBrowser_RefreshButton) {
             profile = "GuiDefaultProfile";
             horizSizing = "right";
             vertSizing = "bottom";
@@ -445,18 +321,17 @@ new GuiControl(ServerBrowser) {
             visible = "1";
             clipToParent = "1";
             command = "ServerBrowser_FetchServerList(1);";
-            text = "";
             groupNum = "-1";
             buttonType = "PushButton";
-            bitmap = "./ui/buttons/refresh";
+            bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/buttons/refresh";
             lockAspectRatio = "0";
             alignLeft = "0";
             alignTop = "0";
             overflowImage = "0";
             mKeepCached = "0";
             mColor = "255 255 255 255";
+            text = "";
          };
-         
          new GuiBitmapButtonCtrl() {
             profile = "GuiDefaultProfile";
             horizSizing = "right";
@@ -468,16 +343,16 @@ new GuiControl(ServerBrowser) {
             visible = "1";
             clipToParent = "1";
             command = "ServerBrowser_JoinButton();";
-            text = "";
             groupNum = "-1";
             buttonType = "PushButton";
-            bitmap = "./ui/buttons/pley";
+            bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/buttons/pley";
             lockAspectRatio = "0";
             alignLeft = "0";
             alignTop = "0";
             overflowImage = "0";
             mKeepCached = "0";
             mColor = "255 255 255 255";
+            text = "";
          };
          new GuiSwatchCtrl(ServerBrowser_ListPane) {
             profile = "GuiDefaultProfile";
@@ -514,7 +389,7 @@ new GuiControl(ServerBrowser) {
                   horizSizing = "right";
                   vertSizing = "bottom";
                   position = "1 1";
-                  extent = "659 2";
+                  extent = "659 1488";
                   minExtent = "8 2";
                   enabled = "1";
                   visible = "1";
@@ -645,10 +520,9 @@ new GuiControl(ServerBrowser) {
                visible = "1";
                clipToParent = "1";
                command = "ServerBrowser_SortList(0);";
-               text = "";
                groupNum = "-1";
                buttonType = "PushButton";
-               bitmap = "./ui/sortd";
+               bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/sortd";
                lockAspectRatio = "0";
                alignLeft = "0";
                alignTop = "0";
@@ -656,6 +530,7 @@ new GuiControl(ServerBrowser) {
                mKeepCached = "0";
                mColor = "255 255 255 255";
                   sortDir = "0";
+                  text = "";
             };
             new GuiBitmapButtonCtrl(ServerBrowser_SA1) {
                profile = "GuiDefaultProfile";
@@ -668,10 +543,9 @@ new GuiControl(ServerBrowser) {
                visible = "1";
                clipToParent = "1";
                command = "ServerBrowser_SortList(1);";
-               text = "";
                groupNum = "-1";
                buttonType = "PushButton";
-               bitmap = "./ui/sortd";
+               bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/sortd";
                lockAspectRatio = "0";
                alignLeft = "0";
                alignTop = "0";
@@ -679,6 +553,7 @@ new GuiControl(ServerBrowser) {
                mKeepCached = "0";
                mColor = "255 255 255 255";
                   sortDir = "0";
+                  text = "";
             };
             new GuiBitmapButtonCtrl(ServerBrowser_SA2) {
                profile = "GuiDefaultProfile";
@@ -691,10 +566,9 @@ new GuiControl(ServerBrowser) {
                visible = "1";
                clipToParent = "1";
                command = "ServerBrowser_SortList(2);";
-               text = "";
                groupNum = "-1";
                buttonType = "PushButton";
-               bitmap = "./ui/sortd";
+               bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/sortd";
                lockAspectRatio = "0";
                alignLeft = "0";
                alignTop = "0";
@@ -702,6 +576,7 @@ new GuiControl(ServerBrowser) {
                mKeepCached = "0";
                mColor = "255 255 255 255";
                   sortDir = "0";
+                  text = "";
             };
             new GuiBitmapButtonCtrl(ServerBrowser_SA3) {
                profile = "GuiDefaultProfile";
@@ -714,10 +589,9 @@ new GuiControl(ServerBrowser) {
                visible = "1";
                clipToParent = "1";
                command = "ServerBrowser_SortNUMList(3);";
-               text = "";
                groupNum = "-1";
                buttonType = "PushButton";
-               bitmap = "./ui/sortd";
+               bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/sortd";
                lockAspectRatio = "0";
                alignLeft = "0";
                alignTop = "0";
@@ -725,6 +599,7 @@ new GuiControl(ServerBrowser) {
                mKeepCached = "0";
                mColor = "255 255 255 255";
                   sortDir = "0";
+                  text = "";
             };
             new GuiBitmapButtonCtrl(ServerBrowser_SA4) {
                profile = "GuiDefaultProfile";
@@ -737,10 +612,9 @@ new GuiControl(ServerBrowser) {
                visible = "1";
                clipToParent = "1";
                command = "ServerBrowser_SortNUMList(4);";
-               text = "";
                groupNum = "-1";
                buttonType = "PushButton";
-               bitmap = "./ui/sortd";
+               bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/sortd";
                lockAspectRatio = "0";
                alignLeft = "0";
                alignTop = "0";
@@ -748,6 +622,7 @@ new GuiControl(ServerBrowser) {
                mKeepCached = "0";
                mColor = "255 255 255 255";
                   sortDir = "0";
+                  text = "";
             };
             new GuiBitmapButtonCtrl(ServerBrowser_SA5) {
                profile = "GuiDefaultProfile";
@@ -760,10 +635,9 @@ new GuiControl(ServerBrowser) {
                visible = "1";
                clipToParent = "1";
                command = "ServerBrowser_SortList(5);";
-               text = "";
                groupNum = "-1";
                buttonType = "PushButton";
-               bitmap = "./ui/sortd";
+               bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/sortd";
                lockAspectRatio = "0";
                alignLeft = "0";
                alignTop = "0";
@@ -771,10 +645,341 @@ new GuiControl(ServerBrowser) {
                mKeepCached = "0";
                mColor = "255 255 255 255";
                   sortDir = "0";
+                  text = "";
             };
          };
-         
-                 new GuiSwatchCtrl(ServerBrowser_ViewPanel) {
+         new GuiSwatchCtrl(ServerBrowser_LANPane) {
+            profile = "GuiDefaultProfile";
+            horizSizing = "right";
+            vertSizing = "bottom";
+            position = "0 68";
+            extent = "696 368";
+            minExtent = "8 2";
+            enabled = "1";
+            visible = "0";
+            clipToParent = "1";
+            color = "0 0 0 0";
+
+            new GuiScrollCtrl(serverBrowser_ListScroll) {
+               profile = "ServerScroll";
+               horizSizing = "right";
+               vertSizing = "bottom";
+               position = "18 29";
+               extent = "669 341";
+               minExtent = "8 2";
+               enabled = "1";
+               visible = "1";
+               clipToParent = "1";
+               willFirstRespond = "0";
+               hScrollBar = "alwaysOff";
+               vScrollBar = "alwaysOn";
+               constantThumbHeight = "0";
+               childMargin = "0 0";
+               rowHeight = "40";
+               columnWidth = "30";
+
+               new GuiTextListCtrl(JS_serverList) {
+                  profile = "LoadingGuiContentProfile";
+                  horizSizing = "right";
+                  vertSizing = "bottom";
+                  position = "1 1";
+                  extent = "659 2";
+                  minExtent = "8 2";
+                  enabled = "1";
+                  visible = "1";
+                  clipToParent = "1";
+                  enumerate = "0";
+                  resizeCell = "1";
+                  columns = "0 210 300 410 500 570";
+                  fitParentWidth = "1";
+                  clipColumnText = "0";
+               };
+            };
+            new GuiMLTextCtrl() {
+               profile = "GuiMLTextProfile";
+               horizSizing = "right";
+               vertSizing = "bottom";
+               position = "19 11";
+               extent = "75 15";
+               minExtent = "8 2";
+               enabled = "1";
+               visible = "1";
+               clipToParent = "1";
+               lineSpacing = "2";
+               allowColorChars = "0";
+               maxChars = "-1";
+               text = "<font:arial:15>Server";
+               maxBitmapHeight = "-1";
+               selectable = "1";
+               autoResize = "1";
+            };
+            new GuiMLTextCtrl() {
+               profile = "GuiMLTextProfile";
+               horizSizing = "right";
+               vertSizing = "bottom";
+               position = "223 11";
+               extent = "75 15";
+               minExtent = "8 2";
+               enabled = "1";
+               visible = "1";
+               clipToParent = "1";
+               lineSpacing = "2";
+               allowColorChars = "0";
+               maxChars = "-1";
+               text = "<font:arial:15>Dedicated";
+               maxBitmapHeight = "-1";
+               selectable = "1";
+               autoResize = "1";
+            };
+            new GuiMLTextCtrl() {
+               profile = "GuiMLTextProfile";
+               horizSizing = "right";
+               vertSizing = "bottom";
+               position = "313 11";
+               extent = "75 15";
+               minExtent = "8 2";
+               enabled = "1";
+               visible = "1";
+               clipToParent = "1";
+               lineSpacing = "2";
+               allowColorChars = "0";
+               maxChars = "-1";
+               text = "<font:arial:15>Password";
+               maxBitmapHeight = "-1";
+               selectable = "1";
+               autoResize = "1";
+            };
+            new GuiMLTextCtrl() {
+               profile = "GuiMLTextProfile";
+               horizSizing = "right";
+               vertSizing = "bottom";
+               position = "422 11";
+               extent = "75 15";
+               minExtent = "8 2";
+               enabled = "1";
+               visible = "1";
+               clipToParent = "1";
+               lineSpacing = "2";
+               allowColorChars = "0";
+               maxChars = "-1";
+               text = "<font:arial:15>Players";
+               maxBitmapHeight = "-1";
+               selectable = "1";
+               autoResize = "1";
+            };
+            new GuiMLTextCtrl() {
+               profile = "GuiMLTextProfile";
+               horizSizing = "right";
+               vertSizing = "bottom";
+               position = "513 11";
+               extent = "75 15";
+               minExtent = "8 2";
+               enabled = "1";
+               visible = "1";
+               clipToParent = "1";
+               lineSpacing = "2";
+               allowColorChars = "0";
+               maxChars = "-1";
+               text = "<font:arial:15>Bricks";
+               maxBitmapHeight = "-1";
+               selectable = "1";
+               autoResize = "1";
+            };
+            new GuiMLTextCtrl() {
+               profile = "GuiMLTextProfile";
+               horizSizing = "right";
+               vertSizing = "bottom";
+               position = "582 11";
+               extent = "75 15";
+               minExtent = "8 2";
+               enabled = "1";
+               visible = "1";
+               clipToParent = "1";
+               lineSpacing = "2";
+               allowColorChars = "0";
+               maxChars = "-1";
+               text = "<font:arial:15>GameMode";
+               maxBitmapHeight = "-1";
+               selectable = "1";
+               autoResize = "1";
+            };
+            new GuiBitmapButtonCtrl(ServerBrowser_LAN_SA0) {
+               profile = "GuiDefaultProfile";
+               horizSizing = "right";
+               vertSizing = "bottom";
+               position = "58 16";
+               extent = "9 7";
+               minExtent = "8 2";
+               enabled = "1";
+               visible = "1";
+               clipToParent = "1";
+               command = "ServerBrowser_SortLANList(0);";
+               text = "Button";
+               groupNum = "-1";
+               buttonType = "PushButton";
+               bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/sortd";
+               lockAspectRatio = "0";
+               alignLeft = "0";
+               alignTop = "0";
+               overflowImage = "0";
+               mKeepCached = "0";
+               mColor = "255 255 255 255";
+                  sortDir = "0";
+                  text = "";
+            };
+            new GuiBitmapButtonCtrl(ServerBrowser_LAN_SA1) {
+               profile = "GuiDefaultProfile";
+               horizSizing = "right";
+               vertSizing = "bottom";
+               position = "284 16";
+               extent = "9 7";
+               minExtent = "8 2";
+               enabled = "1";
+               visible = "1";
+               clipToParent = "1";
+               command = "ServerBrowser_SortLANList(1);";
+               text = "Button";
+               groupNum = "-1";
+               buttonType = "PushButton";
+               bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/sortd";
+               lockAspectRatio = "0";
+               alignLeft = "0";
+               alignTop = "0";
+               overflowImage = "0";
+               mKeepCached = "0";
+               mColor = "255 255 255 255";
+                  sortDir = "0";
+                  text = "";
+            };
+            new GuiBitmapButtonCtrl(ServerBrowser_LAN_SA2) {
+               profile = "GuiDefaultProfile";
+               horizSizing = "right";
+               vertSizing = "bottom";
+               position = "373 16";
+               extent = "9 7";
+               minExtent = "8 2";
+               enabled = "1";
+               visible = "1";
+               clipToParent = "1";
+               command = "ServerBrowser_SortLANList(2);";
+               text = "Button";
+               groupNum = "-1";
+               buttonType = "PushButton";
+               bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/sortd";
+               lockAspectRatio = "0";
+               alignLeft = "0";
+               alignTop = "0";
+               overflowImage = "0";
+               mKeepCached = "0";
+               mColor = "255 255 255 255";
+                  sortDir = "0";
+                  text = "";
+            };
+            new GuiBitmapButtonCtrl(ServerBrowser_LAN_SA3) {
+               profile = "GuiDefaultProfile";
+               horizSizing = "right";
+               vertSizing = "bottom";
+               position = "467 16";
+               extent = "9 7";
+               minExtent = "8 2";
+               enabled = "1";
+               visible = "1";
+               clipToParent = "1";
+               command = "ServerBrowser_SortNUMLANList(3);";
+               text = "Button";
+               groupNum = "-1";
+               buttonType = "PushButton";
+               bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/sortd";
+               lockAspectRatio = "0";
+               alignLeft = "0";
+               alignTop = "0";
+               overflowImage = "0";
+               mKeepCached = "0";
+               mColor = "255 255 255 255";
+                  sortDir = "0";
+                  text = "";
+            };
+            new GuiBitmapButtonCtrl(ServerBrowser_LAN_SA4) {
+               profile = "GuiDefaultProfile";
+               horizSizing = "right";
+               vertSizing = "bottom";
+               position = "551 16";
+               extent = "9 7";
+               minExtent = "8 2";
+               enabled = "1";
+               visible = "1";
+               clipToParent = "1";
+               command = "ServerBrowser_SortNUMLANList(4);";
+               text = "Button";
+               groupNum = "-1";
+               buttonType = "PushButton";
+               bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/sortd";
+               lockAspectRatio = "0";
+               alignLeft = "0";
+               alignTop = "0";
+               overflowImage = "0";
+               mKeepCached = "0";
+               mColor = "255 255 255 255";
+                  sortDir = "0";
+                  text = "";
+            };
+            new GuiBitmapButtonCtrl(ServerBrowser_LAN_SA5) {
+               profile = "GuiDefaultProfile";
+               horizSizing = "right";
+               vertSizing = "bottom";
+               position = "649 16";
+               extent = "9 7";
+               minExtent = "8 2";
+               enabled = "1";
+               visible = "1";
+               clipToParent = "1";
+               command = "ServerBrowser_SortLANList(5);";
+               text = "Button";
+               groupNum = "-1";
+               buttonType = "PushButton";
+               bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/sortd";
+               lockAspectRatio = "0";
+               alignLeft = "0";
+               alignTop = "0";
+               overflowImage = "0";
+               mKeepCached = "0";
+               mColor = "255 255 255 255";
+                  sortDir = "0";
+                  text = "";
+            };
+         };
+         new GuiScrollCtrl(serverBrowser_Favscroll) {
+            profile = "ServerScroll";
+            horizSizing = "right";
+            vertSizing = "bottom";
+            position = "18 67";
+            extent = "669 371";
+            minExtent = "8 2";
+            enabled = "1";
+            visible = "0";
+            clipToParent = "1";
+            willFirstRespond = "0";
+            hScrollBar = "alwaysOff";
+            vScrollBar = "alwaysOn";
+            constantThumbHeight = "0";
+            childMargin = "0 0";
+            rowHeight = "40";
+            columnWidth = "30";
+
+            new GuiSwatchCtrl(serverBrowser_FavCanvas) {
+               profile = "GuiDefaultProfile";
+               horizSizing = "right";
+               vertSizing = "bottom";
+               position = "1 1";
+               extent = "675 2";
+               minExtent = "8 2";
+               enabled = "1";
+               visible = "1";
+               clipToParent = "1";
+               color = "0 0 0 0";
+            };
+         };
+         new GuiSwatchCtrl(ServerBrowser_ViewPanel) {
             profile = "GuiDefaultProfile";
             horizSizing = "right";
             vertSizing = "bottom";
@@ -809,16 +1014,16 @@ new GuiControl(ServerBrowser) {
                   visible = "1";
                   clipToParent = "1";
                   command = "ServerBrowser_SetGridView();";
-                  text = "";
                   groupNum = "-1";
                   buttonType = "PushButton";
-                  bitmap = "./ui/buttons/VCGrid";
+                  bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/buttons/VCGrid";
                   lockAspectRatio = "0";
                   alignLeft = "0";
                   alignTop = "0";
                   overflowImage = "0";
                   mKeepCached = "0";
                   mColor = "255 255 255 255";
+                  text = "";
                };
                new GuiBitmapButtonCtrl() {
                   profile = "GuiDefaultProfile";
@@ -831,16 +1036,16 @@ new GuiControl(ServerBrowser) {
                   visible = "1";
                   clipToParent = "1";
                   command = "ServerBrowser_SetSecView();";
-                  text = "";
                   groupNum = "-1";
                   buttonType = "PushButton";
-                  bitmap = "./ui/buttons/VCSec";
+                  bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/buttons/VCSec";
                   lockAspectRatio = "0";
                   alignLeft = "0";
                   alignTop = "0";
                   overflowImage = "0";
                   mKeepCached = "0";
                   mColor = "255 255 255 255";
+                  text = "";
                };
                new GuiBitmapButtonCtrl() {
                   profile = "GuiDefaultProfile";
@@ -853,16 +1058,16 @@ new GuiControl(ServerBrowser) {
                   visible = "1";
                   clipToParent = "1";
                   command = "ServerBrowser_SetListView();";
-                  text = "";
                   groupNum = "-1";
                   buttonType = "PushButton";
-                  bitmap = "./ui/buttons/VCList";
+                  bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/buttons/VCList";
                   lockAspectRatio = "0";
                   alignLeft = "0";
                   alignTop = "0";
                   overflowImage = "0";
                   mKeepCached = "0";
                   mColor = "255 255 255 255";
+                  text = "";
                };
             };
             new GuiSwatchCtrl() {
@@ -888,24 +1093,20 @@ new GuiControl(ServerBrowser) {
                   visible = "1";
                   clipToParent = "1";
                   command = "serverBrowser_ShowPrevPane();";
-                  text = "";
                   groupNum = "-1";
                   buttonType = "PushButton";
-                  bitmap = "./ui/buttons/VCPrev";
+                  bitmap = "~/System_GuiPlus/modules/serverBrowser/ui/buttons/VCPrev";
                   lockAspectRatio = "0";
                   alignLeft = "0";
                   alignTop = "0";
                   overflowImage = "0";
                   mKeepCached = "0";
                   mColor = "255 255 255 255";
+                  text = "";
                };
             };
          };
-      
       };
-      
-
    };
-
 };
 //--- OBJECT WRITE END ---

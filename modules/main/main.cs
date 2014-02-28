@@ -24,7 +24,7 @@ function iMain_timeLoop()
 		if(%hours >= 12)
 		{
 			%hours = %hours - 12;
-			if(%hours = 0)
+			if(%hours $= "0")
 			   %hours = "12";
 			%m = " PM";
 			%time = %hours @ getSubStr(%time,%firstColon,%len);

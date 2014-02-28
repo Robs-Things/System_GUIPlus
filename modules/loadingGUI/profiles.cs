@@ -13,6 +13,7 @@ new GuiControlProfile(BlotaBodyText)
    fontSize = 12;
    fontType = "Verdana";
    justify = "Left";
+   fillColor = "0 0 0 100";
 };
 new GuiControlProfile(BlotaLoadingTextC)
 {

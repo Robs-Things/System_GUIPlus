@@ -1,5 +1,8 @@
 exec("./profiles.cs");
 exec("./ServerBrowser.gui");
+
+JS_serverList.delete();
+//Allows us to use the JS_serverList object as our lan browser
 $ServerBrowser::Mode = "grid";
 // Here we go
 
@@ -7,6 +10,7 @@ $ServerBrowser::Mode = "grid";
 // Preview Imaging
 // Listing generation
 // Support functions
+// Favourites
 
 // Master server parser
 function ServerBrowser_FetchServerList(%old, %search)
@@ -97,6 +101,8 @@ function ServerBrowser_RenderServer(%rawData)
       color = "0 0 0 0";
       ip = %server_ip;
       port = %server_port;
+      servName = %serverName;
+      servhost = %host;
 
       new GuiBitmapCtrl("ServPreview_" @ $serverBrowser::NumServers) {
          profile = "GuiDefaultProfile";
@@ -221,10 +227,11 @@ function ServerBrowser_RenderServer(%rawData)
             visible = "1";
             clipToParent = "1";
             command = "ServerBrowser_Join(\"" @ %rawData TAB %host TAB %serverName @ "\");";
+            altCommand = "ServerBrowser_CreateRCMenu(" @ $ServerBrowser::NumServers @ ");";
             text = "";
             groupNum = "-1";
             buttonType = "PushButton";
-            bitmap = "add-ons/system_GUIplus/modules/main/images/buttons/misc/blank";
+            bitmap = "add-ons/system_guiplus/modules/serverbrowser/ui/buttons/over";
             lockAspectRatio = "0";
             alignLeft = "0";
             alignTop = "0";
@@ -440,4 +447,158 @@ function ServerBrowser_JoinButton()
       
    %cmd = ("GridButton_" @ %id).command;
    eval(%cmd);
+}
+
+function ServerBrowser_CreateRCMenu(%id)
+{
+   %pos = (getWord(canvas.getCursorPos(), 0) - 10) SPC (getWord(canvas.getCursorPos(), 1) - 10);
+   
+   %obj = new GuiWindowCtrl(minmen) {
+      profile = "LoadingGuiWindowProfile";
+      horizSizing = "right";
+      vertSizing = "bottom";
+      position = %pos;
+      extent = "122 38";
+      minExtent = "8 2";
+      enabled = "1";
+      visible = "1";
+      clipToParent = "1";
+      maxLength = "255";
+      resizeWidth = "0";
+      resizeHeight = "0";
+      canMove = "0";
+      canClose = "0";
+      canMinimize = "0";
+      canMaximize = "0";
+      minSize = "50 50";
+
+      new GuiBitmapButtonCtrl() {
+         profile = "GuiDefaultProfile";
+         horizSizing = "right";
+         vertSizing = "bottom";
+         position = "2 2";
+         extent = "117 34";
+         minExtent = "8 2";
+         enabled = "1";
+         visible = "1";
+         clipToParent = "1";
+         command = "ServerBrowser_AddFav(" @ %id @ "); minmen.delete(); cancel($SB::CCPSched);";
+         groupNum = "-1";
+         buttonType = "PushButton";
+         bitmap = "Add-Ons/System_GuiPlus/modules/serverBrowser/ui/buttons/fav";
+         text = "";
+         lockAspectRatio = "0";
+         alignLeft = "0";
+         alignTop = "0";
+         overflowImage = "0";
+         mKeepCached = "0";
+         mColor = "255 255 255 255";
+      };
+   };
+   ServerBrowser.add(%obj);
+   ServerBrowser_CheckCursorPos(%obj);
+}
+
+function ServerBrowser_CheckCursorPos(%obj)
+{
+   cancel($SB::CCPSched);
+   %curPos = canvas.getCursorPos();
+   
+   if(getWord(%curPos, 0) > getWord(%obj.position, 0) && getWord(%curPos, 0) < (getWord(%obj.position, 0) + getWord(%obj.extent, 0)) && getWord(%curPos, 1) > getWord(%obj.position, 1) && getWord(%curPos, 1) < (getWord(%obj.position, 1) + getWord(%obj.extent, 1)))
+   {
+      $SB::CCPSched = schedule(50, 0, ServerBrowser_CheckCursorPos, %obj);
+      return;
+   }
+   %obj.delete();
+}
+
+function ServerBrowser_AddFav(%id)
+{
+   %ip = ("ServSwatch_" @ %id).ip;
+   %port = ("ServSwatch_" @ %id).port;
+   %name = ("ServSwatch_" @ %id).servName;
+   %host = ("ServSwatch_" @ %id).ServHost;
+   
+   %line = %ip TAB %port TAB %host TAB %name;
+   %check = %ip TAB %port;
+   
+   if(isFile("config/client/guiplus/fav.dat"))
+   {
+      %fo = new fileObject();
+      %fo.openForRead("config/client/guiplus/fav.dat");
+      %abort = false;
+      while(!%fo.isEOF())
+      {
+         %file_line = %fo.readLine();
+         if(%check $= (getField(%file_line, 0) TAB getField(%file_line, 1)))
+         {
+            echo("Trying to add duplicate favourite entry. Aborting...");
+            %abort = true;
+            break;
+         }
+      }
+      %fo.close();
+      %fo.delete();
+      
+      if(%abort)
+         return;
+   }
+   
+   %fo2 = new fileObject();
+   %fo2.openForAppend("config/client/guiplus/fav.dat");
+   %fo2.writeLine(%line);
+   
+   %fo2.close();
+   %fo2.delete();
+}
+
+function ServerBrowser_INTTab()
+{
+   ServerBrowser_CloseALLPanes();
+   serverBrowser_scroll.setVisible(1);
+   ServerBrowser_viewButton.setVisible(1);
+   ServerBrowser_RefreshButton.command = "ServerBrowser_FetchServerList(1);";
+   ServerBrowser_TAB_Internet.setBitmap("Add-ons/System_GuiPlus/modules/serverBrowser/ui/buttons/tabc");
+}
+
+function ServerBrowser_LANTab()
+{
+   ServerBrowser_CloseALLPanes();
+   ServerBrowser_LANPane.setVisible(1);
+   JoinServerGui.queryLan();
+   ServerBrowser_RefreshButton.command = "JoinServerGui.queryLan();";
+   ServerBrowser_TAB_LAN.setBitmap("Add-ons/System_GuiPlus/modules/serverBrowser/ui/buttons/tabc");
+}
+
+function ServerBrowser_FAVTab()
+{
+   ServerBrowser_CloseALLPanes();
+   serverBrowser_Favscroll.setVisible(1);
+   ServerBrowser_RefreshButton.command = "ServerBrowser_RefreshFavList();";
+   ServerBrowser_TAB_FAV.setBitmap("Add-ons/System_GuiPlus/modules/serverBrowser/ui/buttons/tabc");
+}
+
+function ServerBrowser_CloseALLPanes()
+{
+   serverBrowser_scroll.setVisible(0);
+   ServerBrowser_ListPane.setVisible(0);
+   ServerBrowser_LANPane.setVisible(0);
+   serverBrowser_Favscroll.setVisible(0);
+   ServerBrowser_viewButton.setVisible(0);
+   ServerBrowser_TAB_LAN.setBitmap("Add-ons/System_GuiPlus/modules/serverBrowser/ui/buttons/tab");
+   ServerBrowser_TAB_FAV.setBitmap("Add-ons/System_GuiPlus/modules/serverBrowser/ui/buttons/tab");
+   ServerBrowser_TAB_Internet.setBitmap("Add-ons/System_GuiPlus/modules/serverBrowser/ui/buttons/tab");
+}
+
+function ServerBrowser_RefreshFavList()
+{
+   %fo = new FileObject();
+   %fo.openForRead("config/client/guiplus/fav.dat");
+   
+   while(!%fo.isEOF())
+   {
+      %line = %fo.readLine();
+      
+      ServerBrowser_RenderServer();
+   }
 }
